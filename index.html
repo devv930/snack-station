@@ -276,6 +276,207 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
   40%{background:#E8001C;transform:scale(1.4)}
 }
 
+
+/* ═══════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════ */
+#admin-overlay{
+  position:fixed;inset:0;z-index:800;
+  background:#0f0f0f;
+  display:none;flex-direction:column;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+#admin-overlay.open{display:flex}
+
+.admin-nav{
+  background:#111;border-bottom:1px solid #222;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 18px;height:58px;flex-shrink:0;
+}
+.admin-nav-left{display:flex;align-items:center;gap:10px}
+.admin-badge{background:var(--red);color:#fff;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.admin-title{font-size:16px;font-weight:800;color:#fff}
+.admin-close-btn{
+  background:#222;border:none;color:#aaa;
+  border-radius:8px;padding:8px 14px;
+  font-size:12px;font-weight:700;cursor:pointer;
+  transition:background .2s;font-family:inherit;
+}
+.admin-close-btn:hover{background:#333;color:#fff}
+
+.admin-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:#222;flex-shrink:0;
+}
+.admin-stat{background:#1a1a1a;padding:12px 10px;text-align:center}
+.admin-stat-val{font-family:'Fredoka One',cursive;font-size:20px;color:#fff}
+.admin-stat-val.red{color:var(--red)}
+.admin-stat-val.green{color:#2ECC71}
+.admin-stat-val.amber{color:#F5A623}
+.admin-stat-lbl{font-size:9px;color:#555;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-top:2px}
+
+.admin-tabs{
+  display:flex;background:#111;border-bottom:1px solid #222;
+  flex-shrink:0;overflow-x:auto;scrollbar-width:none;
+}
+.admin-tabs::-webkit-scrollbar{display:none}
+.admin-tab{
+  flex-shrink:0;padding:12px 18px;font-size:12px;font-weight:700;
+  color:#555;border-bottom:2px solid transparent;
+  cursor:pointer;transition:all .2s;background:none;border-left:none;border-right:none;border-top:none;
+  font-family:inherit;white-space:nowrap;
+}
+.admin-tab.active{color:#fff;border-bottom-color:var(--red)}
+.admin-tab .tab-count{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:#222;color:#888;border-radius:10px;
+  padding:1px 7px;font-size:10px;margin-left:5px;
+  transition:all .2s;
+}
+.admin-tab.active .tab-count{background:var(--red);color:#fff}
+
+.admin-search-bar{
+  margin:14px 14px 0;
+  background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;
+  display:flex;align-items:center;gap:10px;padding:10px 14px;flex-shrink:0;
+}
+.admin-search-bar input{
+  flex:1;border:none;outline:none;background:transparent;
+  font-size:13px;color:#fff;font-family:inherit;
+}
+.admin-search-bar input::placeholder{color:#444}
+
+.admin-orders-list{
+  flex:1;overflow-y:auto;padding:14px;
+  display:flex;flex-direction:column;gap:12px;
+}
+
+.admin-order-card{
+  background:#1a1a1a;border-radius:14px;
+  border:1px solid #2a2a2a;overflow:hidden;
+  transition:border-color .2s;
+}
+.admin-order-card:hover{border-color:#333}
+.admin-order-card.expanded .aoc-body{display:block}
+
+.aoc-header{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;cursor:pointer;
+}
+.aoc-order-num{
+  font-size:13px;font-weight:800;color:#fff;flex:1;
+}
+.aoc-order-num span{color:#555;font-weight:600;font-size:11px;display:block;margin-top:1px}
+.aoc-total{font-family:'Fredoka One',cursive;font-size:16px;color:var(--red)}
+.aoc-status{
+  border-radius:20px;padding:4px 10px;
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+  flex-shrink:0;
+}
+.aoc-status.ongoing{background:#2a2000;color:#F5A623}
+.aoc-status.ready{background:#002a10;color:#2ECC71}
+.aoc-status.completed{background:#1a1a1a;color:#555;border:1px solid #333}
+.aoc-chevron{color:#444;transition:transform .25s;flex-shrink:0}
+.admin-order-card.expanded .aoc-chevron{transform:rotate(180deg)}
+
+.aoc-pay-badge{
+  border-radius:20px;padding:3px 9px;
+  font-size:9px;font-weight:800;text-transform:uppercase;
+  flex-shrink:0;
+}
+.aoc-pay-badge.paid{background:#002a10;color:#2ECC71}
+.aoc-pay-badge.pending{background:#2a0000;color:#E8001C}
+
+.aoc-body{
+  display:none;
+  border-top:1px solid #252525;
+  padding:14px 16px;
+}
+
+/* Customer info section */
+.aoc-section{margin-bottom:14px}
+.aoc-section-title{font-size:10px;font-weight:800;color:#444;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.aoc-info-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.aoc-info-icon{width:28px;height:28px;border-radius:6px;background:#222;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.aoc-info-label{font-size:10px;color:#555;font-weight:600}
+.aoc-info-val{font-size:13px;color:#ddd;font-weight:700;margin-top:1px}
+
+/* Items table */
+.aoc-items{background:#111;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.aoc-item-row{display:flex;align-items:center;padding:9px 12px;border-bottom:1px solid #1a1a1a;gap:10px}
+.aoc-item-row:last-child{border-bottom:none}
+.aoc-item-img{width:36px;height:36px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#222}
+.aoc-item-img img{width:100%;height:100%;object-fit:cover}
+.aoc-item-name{flex:1;font-size:12px;font-weight:700;color:#ccc}
+.aoc-item-qty{font-size:11px;color:#555;font-weight:600}
+.aoc-item-price{font-size:12px;font-weight:800;color:var(--red)}
+
+/* Action buttons */
+.aoc-actions{display:flex;gap:8px;margin-top:4px}
+.aoc-btn{
+  flex:1;border-radius:8px;padding:11px;
+  font-size:12px;font-weight:800;border:none;cursor:pointer;
+  font-family:inherit;transition:opacity .2s,transform .12s;
+}
+.aoc-btn:hover{opacity:0.88;transform:scale(1.02)}
+.aoc-btn:active{transform:scale(0.98)}
+.aoc-btn.ready-btn{background:#2ECC71;color:#000}
+.aoc-btn.complete-btn{background:#333;color:#aaa}
+.aoc-btn.confirm-pay-btn{background:var(--red);color:#fff}
+.aoc-btn.del-btn{background:#1a1a1a;border:1px solid #333;color:#555}
+.aoc-btn:disabled{opacity:0.35;cursor:not-allowed;transform:none}
+
+/* Mode chip */
+.mode-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  border-radius:20px;padding:3px 9px;font-size:10px;font-weight:800;
+}
+.mode-chip.pickup{background:#1a1a2a;color:#6680ff}
+.mode-chip.delivery{background:#2a1a00;color:#F5A623}
+
+/* Empty admin */
+.admin-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#333;gap:12px}
+.admin-empty svg{opacity:0.3}
+.admin-empty p{font-size:13px;font-weight:600}
+
+/* Notification bell badge */
+.notif-wrap{position:relative;cursor:pointer}
+.notif-badge{
+  position:absolute;top:-4px;right:-4px;
+  background:var(--red);color:#fff;border-radius:50%;
+  width:16px;height:16px;font-size:9px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid #111;
+}
+
+/* Admin login */
+#admin-login{
+  position:fixed;inset:0;z-index:850;
+  background:rgba(0,0,0,0.92);
+  display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);
+}
+#admin-login.open{display:flex}
+.login-sheet{
+  background:#1a1a1a;border:1px solid #2a2a2a;
+  border-radius:20px;width:min(340px,90vw);
+  padding:28px 24px;
+}
+.login-sheet h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:4px}
+.login-sheet p{font-size:12px;color:#555;margin-bottom:20px}
+.login-input{
+  width:100%;background:#111;border:1.5px solid #2a2a2a;
+  border-radius:10px;padding:13px 14px;font-size:14px;
+  font-family:inherit;outline:none;color:#fff;margin-bottom:12px;
+}
+.login-input:focus{border-color:var(--red)}
+.login-btn{
+  width:100%;background:var(--red);color:#fff;
+  border-radius:10px;padding:14px;font-size:14px;font-weight:800;
+  border:none;cursor:pointer;font-family:inherit;
+}
+.login-err{font-size:12px;color:var(--red);text-align:center;margin-top:8px;display:none}
+
 </style>
 </head>
 <body>
@@ -456,6 +657,11 @@ button{cursor:pointer;font-family:inherit;border:none;outline:none}
     <div class="profile-menu-item">
       <div class="pmi-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
       <span class="pmi-label">Help & Support</span>
+      <svg class="pmi-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </div>
+    <div class="profile-menu-item" onclick="openAdminLogin()">
+      <div class="pmi-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <span class="pmi-label">Admin Panel</span>
       <svg class="pmi-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
     </div>
     <div class="profile-menu-item" onclick="showToast('Logged out!')">
@@ -658,7 +864,17 @@ function checkout() {
   }
   if (total > wallet) { showToast('Insufficient balance. Fund wallet!'); return; }
   wallet -= total;
-  orders.unshift({id:'ORD'+Date.now().toString().slice(-6),items:keys.map(id=>{const item=MENU.find(m=>m.id==id);return {...item,quantity:cart[id]};}),total,status:'ongoing',createdAt:new Date().toLocaleString()});
+  const custName = deliveryMode==='delivery' ? document.getElementById('d-name').value.trim() : 'Walk-in / Pickup';
+  const custPhone = deliveryMode==='delivery' ? document.getElementById('d-phone').value.trim() : '';
+  const custAddr = deliveryMode==='delivery' ? document.getElementById('d-loc').value.trim() : '';
+  orders.unshift({
+    id:'ORD'+Date.now().toString().slice(-6),
+    items:keys.map(id=>{const item=MENU.find(m=>m.id==id);return {...item,quantity:cart[id]};}),
+    total, status:'ongoing', paymentStatus:'paid',
+    mode: deliveryMode,
+    customerName: custName, customerPhone: custPhone, customerAddress: custAddr,
+    createdAt:new Date().toLocaleString()
+  });
   cart = {};
   save(); updateCount(); renderMenu(); closeCart(); updateWalletDisplay();
   document.getElementById('success-screen').classList.add('show');
@@ -735,6 +951,186 @@ function showToast(msg) {
 
 renderMenu(); updateCount(); updateWalletDisplay(); renderZones(ZONES);
 
+// ═══════════════════════════════════════
+// ADMIN PANEL
+// ═══════════════════════════════════════
+const ADMIN_PASS = 'snack2024';
+let adminTab = 'all';
+let expandedOrders = new Set();
+
+function openAdminLogin() {
+  document.getElementById('admin-login').classList.add('open');
+  setTimeout(()=>document.getElementById('admin-pass').focus(), 200);
+}
+function doAdminLogin() {
+  const pass = document.getElementById('admin-pass').value;
+  if (pass === ADMIN_PASS) {
+    document.getElementById('admin-login').classList.remove('open');
+    document.getElementById('admin-pass').value = '';
+    document.getElementById('login-err').style.display = 'none';
+    openAdmin();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+    document.getElementById('admin-pass').value = '';
+  }
+}
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('open');
+  renderAdminOrders();
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+function switchAdminTab(tab, btn) {
+  adminTab = tab;
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdminOrders();
+}
+function toggleAdminCard(id) {
+  if (expandedOrders.has(id)) expandedOrders.delete(id);
+  else expandedOrders.add(id);
+  renderAdminOrders();
+}
+function adminUpdateStatus(id, status) {
+  const o = orders.find(x=>x.id===id);
+  if (!o) return;
+  o.status = status;
+  save(); renderAdminOrders(); renderOrders();
+  showToast('Order ' + id + ' → ' + status);
+}
+function adminConfirmPayment(id) {
+  const o = orders.find(x=>x.id===id);
+  if (!o) return;
+  o.paymentStatus = 'paid';
+  save(); renderAdminOrders();
+  showToast('Payment confirmed for ' + id);
+}
+function adminDeleteOrder(id) {
+  if (!confirm('Delete order ' + id + '?')) return;
+  orders = orders.filter(x=>x.id!==id);
+  expandedOrders.delete(id);
+  save(); renderAdminOrders(); renderOrders();
+  showToast('Order deleted');
+}
+
+function renderAdminOrders() {
+  const q = (document.getElementById('adminSearch')||{value:''}).value.toLowerCase();
+  let list = orders;
+
+  // tab filter
+  if (adminTab === 'delivery') list = list.filter(o=>o.mode==='delivery');
+  else if (adminTab !== 'all') list = list.filter(o=>o.status===adminTab);
+
+  // search filter
+  if (q) list = list.filter(o =>
+    o.id.toLowerCase().includes(q) ||
+    (o.customerName||'').toLowerCase().includes(q) ||
+    (o.customerPhone||'').toLowerCase().includes(q) ||
+    (o.customerAddress||'').toLowerCase().includes(q)
+  );
+
+  // update stats
+  document.getElementById('stat-total').textContent = orders.length;
+  document.getElementById('stat-ongoing').textContent = orders.filter(o=>o.status==='ongoing').length;
+  document.getElementById('stat-ready').textContent = orders.filter(o=>o.status==='ready').length;
+  const rev = orders.filter(o=>o.paymentStatus==='paid').reduce((s,o)=>s+o.total,0);
+  document.getElementById('stat-revenue').textContent = fmt(rev);
+
+  // tab counts
+  document.getElementById('tc-all').textContent = orders.length;
+  document.getElementById('tc-ongoing').textContent = orders.filter(o=>o.status==='ongoing').length;
+  document.getElementById('tc-ready').textContent = orders.filter(o=>o.status==='ready').length;
+  document.getElementById('tc-completed').textContent = orders.filter(o=>o.status==='completed').length;
+  document.getElementById('tc-delivery').textContent = orders.filter(o=>o.mode==='delivery').length;
+
+  const el = document.getElementById('adminOrdersList');
+  if (!list.length) {
+    el.innerHTML = '<div class="admin-empty"><svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg><p>No orders found</p></div>';
+    return;
+  }
+
+  el.innerHTML = list.map(o => {
+    const isExp = expandedOrders.has(o.id);
+    const payBadge = o.paymentStatus==='paid'
+      ? '<span class="aoc-pay-badge paid">✓ Paid</span>'
+      : '<span class="aoc-pay-badge pending">⏳ Pending</span>';
+    const modeChip = o.mode==='delivery'
+      ? '<span class="mode-chip delivery">🚴 Delivery</span>'
+      : '<span class="mode-chip pickup">🏪 Pickup</span>';
+
+    const itemsHtml = o.items.map(i=>`
+      <div class="aoc-item-row">
+        <div class="aoc-item-img"><img src="${i.img}" alt="${i.name}"/></div>
+        <div class="aoc-item-name">${i.name}</div>
+        <div class="aoc-item-qty">×${i.quantity}</div>
+        <div class="aoc-item-price">${fmt(i.price * i.quantity)}</div>
+      </div>`).join('');
+
+    const custInfo = o.mode==='delivery' ? `
+      <div class="aoc-section">
+        <div class="aoc-section-title">Customer Info</div>
+        <div class="aoc-info-row">
+          <div class="aoc-info-icon"><svg width="14" height="14" fill="none" stroke="#aaa" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="aoc-info-label">Full Name</div><div class="aoc-info-val">${o.customerName||'—'}</div></div>
+        </div>
+        <div class="aoc-info-row">
+          <div class="aoc-info-icon"><svg width="14" height="14" fill="none" stroke="#aaa" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+          <div><div class="aoc-info-label">Phone Number</div><div class="aoc-info-val">${o.customerPhone||'—'}</div></div>
+        </div>
+        <div class="aoc-info-row">
+          <div class="aoc-info-icon"><svg width="14" height="14" fill="none" stroke="#aaa" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <div><div class="aoc-info-label">Delivery Address</div><div class="aoc-info-val">${o.customerAddress||'—'}</div></div>
+        </div>
+      </div>` : `
+      <div class="aoc-section">
+        <div class="aoc-section-title">Customer Info</div>
+        <div class="aoc-info-row">
+          <div class="aoc-info-icon">🏪</div>
+          <div><div class="aoc-info-label">Type</div><div class="aoc-info-val">Walk-in / Pickup</div></div>
+        </div>
+      </div>`;
+
+    const actionBtns = `
+      <div class="aoc-actions">
+        ${o.status==='ongoing' ? `<button class="aoc-btn ready-btn" onclick="adminUpdateStatus('${o.id}','ready');event.stopPropagation()">✓ Mark Ready</button>` : ''}
+        ${o.status==='ready' ? `<button class="aoc-btn complete-btn" onclick="adminUpdateStatus('${o.id}','completed');event.stopPropagation()">📦 Mark Picked Up</button>` : ''}
+        ${o.status==='completed' ? `<button class="aoc-btn complete-btn" disabled>✓ Completed</button>` : ''}
+        ${o.paymentStatus!=='paid' ? `<button class="aoc-btn confirm-pay-btn" onclick="adminConfirmPayment('${o.id}');event.stopPropagation()">💳 Confirm Payment</button>` : ''}
+        <button class="aoc-btn del-btn" onclick="adminDeleteOrder('${o.id}');event.stopPropagation()">🗑</button>
+      </div>`;
+
+    return `<div class="admin-order-card ${isExp?'expanded':''}">
+      <div class="aoc-header" onclick="toggleAdminCard('${o.id}')">
+        <div class="aoc-order-num">
+          #${o.id}
+          <span>${o.createdAt}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          ${modeChip}
+          ${payBadge}
+        </div>
+        <span class="aoc-status ${o.status}">${o.status==='ongoing'?'Preparing':o.status==='ready'?'Ready':'Done'}</span>
+        <div class="aoc-total">${fmt(o.total)}</div>
+        <svg class="aoc-chevron" width="16" height="16" fill="none" stroke="#444" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="aoc-body">
+        ${custInfo}
+        <div class="aoc-section">
+          <div class="aoc-section-title">Order Items</div>
+          <div class="aoc-items">${itemsHtml}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 2px">
+            <span style="font-size:12px;color:#555;font-weight:600">Order Total</span>
+            <span style="font-family:'Fredoka One',cursive;font-size:18px;color:var(--red)">${fmt(o.total)}</span>
+          </div>
+        </div>
+        ${actionBtns}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+
 // SPLASH SCREEN
 (function(){
   const splash = document.getElementById('splash-screen');
@@ -745,5 +1141,66 @@ renderMenu(); updateCount(); updateWalletDisplay(); renderZones(ZONES);
 })();
 
 </script>
+
+<!-- ══════════════ ADMIN LOGIN ══════════════ -->
+<div id="admin-login">
+  <div class="login-sheet">
+    <h2>🔐 Admin Access</h2>
+    <p>Enter your admin password to continue</p>
+    <input class="login-input" id="admin-pass" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doAdminLogin()"/>
+    <button class="login-btn" onclick="doAdminLogin()">Login to Admin Panel</button>
+    <div class="login-err" id="login-err">❌ Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN PANEL ══════════════ -->
+<div id="admin-overlay">
+  <div class="admin-nav">
+    <div class="admin-nav-left">
+      <div class="admin-badge">ADMIN</div>
+      <span class="admin-title">Snack Station Dashboard</span>
+    </div>
+    <button class="admin-close-btn" onclick="closeAdmin()">✕ Exit</button>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="admin-stats">
+    <div class="admin-stat">
+      <div class="admin-stat-val red" id="stat-total">0</div>
+      <div class="admin-stat-lbl">Total Orders</div>
+    </div>
+    <div class="admin-stat">
+      <div class="admin-stat-val amber" id="stat-ongoing">0</div>
+      <div class="admin-stat-lbl">Preparing</div>
+    </div>
+    <div class="admin-stat">
+      <div class="admin-stat-val green" id="stat-ready">0</div>
+      <div class="admin-stat-lbl">Ready</div>
+    </div>
+    <div class="admin-stat">
+      <div class="admin-stat-val" id="stat-revenue" style="font-size:13px;padding-top:3px">₦0</div>
+      <div class="admin-stat-lbl">Revenue</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchAdminTab('all',this)">All Orders <span class="tab-count" id="tc-all">0</span></button>
+    <button class="admin-tab" onclick="switchAdminTab('ongoing',this)">Preparing <span class="tab-count" id="tc-ongoing">0</span></button>
+    <button class="admin-tab" onclick="switchAdminTab('ready',this)">Ready <span class="tab-count" id="tc-ready">0</span></button>
+    <button class="admin-tab" onclick="switchAdminTab('completed',this)">Completed <span class="tab-count" id="tc-completed">0</span></button>
+    <button class="admin-tab" onclick="switchAdminTab('delivery',this)">Delivery <span class="tab-count" id="tc-delivery">0</span></button>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="admin-search-bar">
+    <svg width="16" height="16" fill="none" stroke="#444" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" placeholder="Search by order ID, name, phone..." id="adminSearch" oninput="renderAdminOrders()"/>
+  </div>
+
+  <!-- ORDERS LIST -->
+  <div class="admin-orders-list" id="adminOrdersList"></div>
+</div>
+
 </body>
 </html>
